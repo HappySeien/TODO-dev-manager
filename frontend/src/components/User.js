@@ -1,5 +1,6 @@
-import React from "react";
-import Table from 'react-bootstrap/Table';
+import React from 'react';
+import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
+
 
 const UserApi = 'http://127.0.0.1:8000/userapp/api/users/'
 
@@ -16,7 +17,7 @@ const UserItem = ({user}) => {
                 {user.last_name}
             </td>
             <td>
-                {user.age}
+                {user.date_of_birth}
             </td>
             <td>
                 {user.email}
@@ -27,20 +28,20 @@ const UserItem = ({user}) => {
 
 const UserList = ({users}) => {
     return(
-        <Table striped bordered hover variant="dark">
-            <thead>
+        <MDBTable className='container-md'>
+            <MDBTableHead>
                 <tr>
                     <th>Username</th>
                     <th>First Name</th>
                     <th>Last Name</th>
-                    <th>Age</th>
+                    <th>Date of birth</th>
                     <th>Email</th>
                 </tr>
-            </thead>
-            <tbody>
+            </MDBTableHead>
+            <MDBTableBody>
                 {users.map((user) => <UserItem user={user} />)}
-            </tbody>  
-        </Table>
+            </MDBTableBody>  
+        </MDBTable>
     )
 }
 
