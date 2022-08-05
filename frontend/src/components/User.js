@@ -1,4 +1,5 @@
 import React from "react";
+import Table from 'react-bootstrap/Table';
 
 const UserApi = 'http://127.0.0.1:8000/userapp/api/users/'
 
@@ -26,24 +27,20 @@ const UserItem = ({user}) => {
 
 const UserList = ({users}) => {
     return(
-        <table>
-            <th>
-                Username
-            </th>
-            <th>
-                First Name
-            </th>
-            <th>
-                Last Name
-            </th>
-            <th>
-                Age
-            </th>
-            <th>
-                Email
-            </th>
-            {users.map((user) => <UserItem user = {user}/>)}
-        </table>
+        <Table striped bordered hover variant="dark">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Age</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {users.map((user) => <UserItem user={user} />)}
+            </tbody>  
+        </Table>
     )
 }
 
