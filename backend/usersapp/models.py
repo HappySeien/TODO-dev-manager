@@ -12,8 +12,12 @@ class User(AbstractUser):
     """
 
     email = models.EmailField(blank=True, unique=True, verbose_name=_('Email'))
-    age = models.PositiveBigIntegerField(**NULLABLE, verbose_name=_('Age'))
+    date_of_birth = models.DateField(**NULLABLE, verbose_name=_('Date of birth'))
     avatar = models.ImageField(upload_to=users_avatars_path, **NULLABLE)
+
+    def save(self, *args, **kwargs):
+        self.username = self.username.lower()
+        return super(User, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = _('User')
