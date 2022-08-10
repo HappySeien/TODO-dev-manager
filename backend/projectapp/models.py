@@ -11,7 +11,7 @@ class ProjectModel(BaseModel):
     Модель описывающая проект
     """
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='project_author', verbose_name=_('Author'))
-    link_to_git = models.URLField(verbose_name=_('Link to git'))
+    link_to_git = models.URLField(**NULLABLE, verbose_name=_('Link to git'))
     developers = models.ManyToManyField(User, related_name='project_developers', verbose_name=_('Developers'))
     name = models.CharField(verbose_name=_('Project name'), max_length=50)
     discroption = models.TextField(**NULLABLE, verbose_name=_('Discription'))
