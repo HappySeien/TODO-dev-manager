@@ -2,7 +2,7 @@ import React from 'react';
 import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 
 
-const UserApi = 'http://127.0.0.1:8000/userapp/api/users/'
+const UserApi = 'http://127.0.0.1:8000/api/users/'
 
 const UserItem = ({user}) => {
     return(

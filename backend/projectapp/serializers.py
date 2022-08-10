@@ -11,3 +11,4 @@ class ProjectModelSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = ProjectModel
         fields = '__all__'
+        
