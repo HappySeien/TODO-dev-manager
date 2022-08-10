@@ -15,15 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework.routers import DefaultRouter
+from rest_framework.routers import SimpleRouter
 
 from usersapp.views import UserModelViewSet
-from projectapp.views import NotesModelViewSet, ProjectModelViewSet
+from projectapp.views import NotesModelViewSet, FastNotesModelViewSet, ProjectModelViewSet, FastProjectModelViewSet
 
-router = DefaultRouter()
+router = SimpleRouter()
 router.register('users', UserModelViewSet)
 router.register('notes', NotesModelViewSet)
+router.register('fast_notes', FastNotesModelViewSet)
 router.register('projects', ProjectModelViewSet)
+router.register('fast_projects', FastProjectModelViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

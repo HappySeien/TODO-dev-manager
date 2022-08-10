@@ -15,6 +15,9 @@ class User(AbstractUser):
     date_of_birth = models.DateField(**NULLABLE, verbose_name=_('Date of birth'))
     avatar = models.ImageField(upload_to=users_avatars_path, **NULLABLE)
 
+    def __str__(self) -> str:
+        return f'{self.username} {self.first_name} {self.last_name}'
+
     def save(self, *args, **kwargs):
         self.username = self.username.lower()
         return super(User, self).save(*args, **kwargs)
