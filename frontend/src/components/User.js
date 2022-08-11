@@ -2,7 +2,7 @@ import React from 'react';
 import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 
 
-const UserApi = 'http://127.0.0.1:8000/userapp/api/users/'
+const UserApi = 'http://127.0.0.1:8000/api/users/'
 
 const UserItem = ({user}) => {
     return(
@@ -11,13 +11,13 @@ const UserItem = ({user}) => {
                 {user.username}
             </td>
             <td>
-                {user.first_name}
+                {user.firstName}
             </td>
             <td>
-                {user.last_name}
+                {user.lastName}
             </td>
             <td>
-                {user.date_of_birth}
+                {user.dateOfBirth}
             </td>
             <td>
                 {user.email}
