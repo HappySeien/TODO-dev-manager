@@ -6,9 +6,9 @@ import { UserItem } from './User';
 import { NoteItem } from './Notes';
 
 const ProjectInfoList = ({ notes, developers, projects }) => {
-    let params = useParams()
-    let project = projects.filter((project) => project.id === parseInt(params.projectId))[0]
-    let filteredNotes = notes.filter((note) => note.project === parseInt(params.projectId))
+    let { projectId } = useParams()
+    let project = projects.filter((project) => project.id === parseInt(projectId))[0]
+    let filteredNotes = notes.filter((note) => note.project === parseInt(projectId))
     let filteredUsers = developers.filter((developer) => project.developers.includes(developer.id))
     return (
     <>
