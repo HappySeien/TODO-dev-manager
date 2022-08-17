@@ -21,7 +21,7 @@ function MainMenu() {
     return (
         <MDBNavbar expand='lg' light bgColor='light'>
             <MDBContainer fluid>
-                <MDBNavbarBrand href='#'>TODO manager</MDBNavbarBrand>
+                <MDBNavbarBrand href='/'>TODO manager</MDBNavbarBrand>
 
                 <MDBNavbarToggler
                     aria-controls='navbarSupportedContent'
@@ -35,7 +35,7 @@ function MainMenu() {
                 <MDBCollapse navbar show={showBasic}>
                     <MDBNavbarNav className='mr-auto mb-2 mb-lg-0'>
                         <MDBNavbarItem>
-                            <MDBNavbarLink active aria-current='page' href='#'>
+                            <MDBNavbarLink active aria-current='page' href='/'>
                                 Home
                             </MDBNavbarLink>
                         </MDBNavbarItem>
@@ -46,17 +46,17 @@ function MainMenu() {
                         <MDBNavbarItem>
                             <MDBDropdown>
                                 <MDBDropdownToggle tag='a' className='nav-link'>
-                                    Dropdown
+                                    Menu
                                 </MDBDropdownToggle>
                                 <MDBDropdownMenu>
                                     <MDBDropdownItem>
-                                        <MDBDropdownLink>Action</MDBDropdownLink>
+                                        <MDBDropdownLink href='/users'>Users</MDBDropdownLink>
                                     </MDBDropdownItem>
                                     <MDBDropdownItem>
-                                        <MDBDropdownLink>Another action</MDBDropdownLink>
+                                        <MDBDropdownLink href='/projects'>Projects</MDBDropdownLink>
                                     </MDBDropdownItem>
                                     <MDBDropdownItem>
-                                        <MDBDropdownLink>Something else here</MDBDropdownLink>
+                                        <MDBDropdownLink href='/notes'>Notes</MDBDropdownLink>
                                     </MDBDropdownItem>
                                 </MDBDropdownMenu>
                             </MDBDropdown>
