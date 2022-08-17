@@ -8,7 +8,6 @@ import { NoteItem } from './Notes';
 const ProjectInfoList = ({ notes, developers, projects }) => {
     let params = useParams()
     let project = projects.filter((project) => project.id === parseInt(params.projectId))[0]
-    console.log(project)
     let filteredNotes = notes.filter((note) => note.project === parseInt(params.projectId))
     let filteredUsers = developers.filter((developer) => project.developers.includes(developer.id))
     return (
