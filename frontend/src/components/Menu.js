@@ -40,7 +40,7 @@ function MainMenu() {
                             </MDBNavbarLink>
                         </MDBNavbarItem>
                         <MDBNavbarItem>
-                            <MDBNavbarLink href='#'>Link</MDBNavbarLink>
+                            <MDBNavbarLink href='/login'>Login</MDBNavbarLink>
                         </MDBNavbarItem>
 
                         <MDBNavbarItem>
