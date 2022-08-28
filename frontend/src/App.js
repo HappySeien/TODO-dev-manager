@@ -30,7 +30,16 @@ class App extends React.Component {
   }
 
   isAuth () {
-    return this.state.token !== ''
+    return !!this.state.token != ''
+  }
+
+  logOut () {
+    localStorage.setItem('token', '')
+    this.setState(
+      {
+        'token': ''
+      }, this.loadData
+    )
   }
 
   getHeaders () {
@@ -44,7 +53,7 @@ class App extends React.Component {
     axios.post(tokenApi, { 'username': username, 'password': password})
       .then(response => {
         const token = response.data.token
-        console.log(token)
+        localStorage.setItem('token', token)
         this.setState(
           {
             'token': token
@@ -57,7 +66,7 @@ class App extends React.Component {
   loadData () {
     let headers =  this.getHeaders()
     // users
-    axios.get(UserApi, {headers})
+    axios.get(UserApi, { headers })
       .then(response => {
         const users = response.data.results
         this.setState(
@@ -69,7 +78,7 @@ class App extends React.Component {
       ).catch(error => console.log(error))
 
     // projects
-    axios.get(ProjectApi, {headers})
+    axios.get(ProjectApi, { headers })
       .then(response => {
         const projects = response.data.results
         this.setState(
@@ -81,7 +90,7 @@ class App extends React.Component {
       ).catch(error => console.log(error))
 
     // notes
-    axios.get(NotesApi, {headers})
+    axios.get(NotesApi, { headers })
       .then(response => {
         const notes = response.data.results
         this.setState(
@@ -94,15 +103,21 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.loadData()
+    let token = localStorage.getItem('token')
+    this.setState(
+      {
+        'token': token
+      }, this.loadData
+    )
   }
 
   render () {
+    console.log(this.state)
     return(
       <div className='d-flex flex-column min-vh-100'>
         <BrowserRouter>
           <nav>
-            <MainMenu />
+            <MainMenu isAuth={() => this.isAuth()} logOut={() => this.logOut()} />
           </nav>
           <Routes>
             <Route exect path='/login' element={<LoginForm authToken={(username, password) => this.authToken(username, password)} />} />

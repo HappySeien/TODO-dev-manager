@@ -35,7 +35,7 @@ class LoginForm extends React.Component {
     render () {
         return (
             <div className='d-flex mx-auto my-auto'>
-                <form onSubmit={(event) => this.handleSubmit(event) }>
+                <form onSubmit={(event) => this.handleSubmit(event)}>
                     <MDBInput className='mb-4' type='text' id='username' name='username' label='Username' value={this.state.username} 
                         onChange={ (event) => this.handleChange(event) } />
                     <MDBInput className='mb-4' type='password' id='password' name='password' label='Password' value={this.state.password} 
