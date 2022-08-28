@@ -23,6 +23,7 @@ class App extends React.Component {
     super(props)
     this.state = {
       'token': '',
+      'currentUser': '',
       'users': [],
       'projects': [],
       'notes': [],
@@ -37,7 +38,8 @@ class App extends React.Component {
     localStorage.setItem('token', '')
     this.setState(
       {
-        'token': ''
+        'token': '',
+        'currentUser': ''
       }, this.loadData
     )
   }
@@ -54,9 +56,11 @@ class App extends React.Component {
       .then(response => {
         const token = response.data.token
         localStorage.setItem('token', token)
+        localStorage.setItem('currentUser', username)
         this.setState(
           {
-            'token': token
+            'token': token,
+            'currentUser': username
           }, this.loadData
         )
       }
@@ -104,9 +108,11 @@ class App extends React.Component {
 
   componentDidMount() {
     let token = localStorage.getItem('token')
+    let username = localStorage.getItem('currentUser')
     this.setState(
       {
-        'token': token
+        'token': token,
+        'currentUser': username
       }, this.loadData
     )
   }
@@ -117,7 +123,7 @@ class App extends React.Component {
       <div className='d-flex flex-column min-vh-100'>
         <BrowserRouter>
           <nav>
-            <MainMenu isAuth={() => this.isAuth()} logOut={() => this.logOut()} />
+            <MainMenu isAuth={() => this.isAuth()} logOut={() => this.logOut()} currentUser={this.state.currentUser} />
           </nav>
           <Routes>
             <Route exect path='/login' element={<LoginForm authToken={(username, password) => this.authToken(username, password)} />} />

@@ -66,9 +66,12 @@ function MainMenu(auth) {
                         </MDBNavbarItem>
 
                         <MDBNavbarItem>
+                            {auth.isAuth() ?
                             <MDBNavbarLink disabled href='#' tabIndex={-1} aria-disabled='true'>
-                                Disabled
-                            </MDBNavbarLink>
+                                 {auth.currentUser}
+                                </MDBNavbarLink> : <MDBNavbarLink disabled href='#' tabIndex={-1} aria-disabled='true'>
+                                    Anonim
+                                </MDBNavbarLink>}
                         </MDBNavbarItem>
                     </MDBNavbarNav>
                 </MDBCollapse>
