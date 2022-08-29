@@ -36,6 +36,7 @@ class App extends React.Component {
 
   logOut () {
     localStorage.setItem('token', '')
+    localStorage.setItem('currentUser', '')
     this.setState(
       {
         'token': '',
@@ -118,7 +119,6 @@ class App extends React.Component {
   }
 
   render () {
-    console.log(this.state)
     return(
       <div className='d-flex flex-column min-vh-100'>
         <BrowserRouter>
