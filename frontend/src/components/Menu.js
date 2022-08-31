@@ -16,7 +16,7 @@ import {
     MDBCollapse,
 } from 'mdb-react-ui-kit';
 
-function MainMenu() {
+function MainMenu(auth) {
     const [showBasic, setShowBasic] = useState(false);
     return (
         <MDBNavbar expand='lg' light bgColor='light'>
@@ -40,7 +40,9 @@ function MainMenu() {
                             </MDBNavbarLink>
                         </MDBNavbarItem>
                         <MDBNavbarItem>
-                            <MDBNavbarLink href='#'>Link</MDBNavbarLink>
+                            {auth.isAuth() ?
+                            <MDBNavbarLink href='#' onClick={() => auth.logOut()}>Logout</MDBNavbarLink> :
+                                <MDBNavbarLink href='/login'>Login</MDBNavbarLink>}
                         </MDBNavbarItem>
 
                         <MDBNavbarItem>
@@ -53,6 +55,7 @@ function MainMenu() {
                                         <MDBDropdownLink href='/users'>Users</MDBDropdownLink>
                                     </MDBDropdownItem>
                                     <MDBDropdownItem>
+
                                         <MDBDropdownLink href='/projects'>Projects</MDBDropdownLink>
                                     </MDBDropdownItem>
                                     <MDBDropdownItem>
@@ -63,9 +66,12 @@ function MainMenu() {
                         </MDBNavbarItem>
 
                         <MDBNavbarItem>
+                            {auth.isAuth() ?
                             <MDBNavbarLink disabled href='#' tabIndex={-1} aria-disabled='true'>
-                                Disabled
-                            </MDBNavbarLink>
+                                 {auth.currentUser}
+                                </MDBNavbarLink> : <MDBNavbarLink disabled href='#' tabIndex={-1} aria-disabled='true'>
+                                    Anonim
+                                </MDBNavbarLink>}
                         </MDBNavbarItem>
                     </MDBNavbarNav>
                 </MDBCollapse>
