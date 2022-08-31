@@ -32,7 +32,7 @@ class SmokeProjectTestCase(TestCase):
     def test_get_project_list(self) -> None:
         factory = APIRequestFactory()
         request = factory.get('/api/projects/')
-        view = NotesModelViewSet.as_view({'get': 'list'})
+        view = ProjectModelViewSet.as_view({'get': 'list'})
         response = view(request)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
