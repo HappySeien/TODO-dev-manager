@@ -5,6 +5,7 @@ from rest_framework.test import APIRequestFactory, force_authenticate, APIClient
 from mixer.backend.django import mixer
 
 from usersapp.models import User
+from .models import ProjectModel, ToDo_noteModel
 from .views import NotesModelViewSet, ProjectModelViewSet
 
 
@@ -12,7 +13,9 @@ from .views import NotesModelViewSet, ProjectModelViewSet
 class SmokeProjectTestCase(TestCase):
 
     def setUp(self) -> None:
-        return super().setUp()
+        self.user = mixer.blend(User)
+        self.project = mixer.blend(ProjectModel)
+        self.note = mixer.blend(ToDo_noteModel)
 
     def test_get_notes_list(self) -> None:
         factory = APIRequestFactory()
@@ -22,7 +25,9 @@ class SmokeProjectTestCase(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_get_note_detail(self) -> None:
-        pass
+        client = APIClient()
+        response = client.get(f'/api/notes/{self.note.id}/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_get_project_list(self) -> None:
         factory = APIRequestFactory()
@@ -31,11 +36,18 @@ class SmokeProjectTestCase(TestCase):
         response = view(request)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_get_project_detail(self) -> None:
+        client = APIClient()
+        response = client.get(f'/api/projects/{self.project.id}/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-class CRUDTestCase(TestCase):
+
+class CRUDTestCase(APITestCase):
     
     def setUp(self) -> None:
-        return super().setUp()
+        self.user = mixer.blend(User)
+        self.project = mixer.blend(ProjectModel)
+        self.note = mixer.blend(ToDo_noteModel)
 
     def test_create_project_guest(self) -> None:
         pass
@@ -72,4 +84,3 @@ class CRUDTestCase(TestCase):
 
     def test_delete_note_auth(self) -> None:
         pass
-    

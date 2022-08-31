@@ -9,11 +9,10 @@ from .views import UserModelViewSet
 
 
 # Create your tests here.
-
 class SmokeUserTestCase(TestCase):
 
     def setUp(self) -> None:
-        return super().setUp()
+        self.user = mixer.blend(User)
 
     def test_get_users_list(self) -> None:
         factory = APIRequestFactory()
@@ -23,7 +22,9 @@ class SmokeUserTestCase(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_get_user_detail(self) -> None:
-        pass
+        client = APIClient()
+        response = client.get(f'/api/users/{self.user.id}/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 
 class CRUDUserTestCase():
