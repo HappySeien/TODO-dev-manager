@@ -25,7 +25,3 @@ class SmokeUserTestCase(TestCase):
         client = APIClient()
         response = client.get(f'/api/users/{self.user.id}/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-
-class CRUDUserTestCase():
-    pass
