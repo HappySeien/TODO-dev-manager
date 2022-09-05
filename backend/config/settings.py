@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'baseapp',
     'usersapp',
     'projectapp',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -178,6 +179,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
+
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.QueryParameterVersioning',
 
 
     # временная общая пагинация
