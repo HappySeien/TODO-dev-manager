@@ -1,4 +1,3 @@
-from pydoc import resolve
 import graphene
 from graphene_django import DjangoObjectType
 
