@@ -39,7 +39,7 @@ class Query(graphene.ObjectType):
 
     all_projects = graphene.List(ProjectObjectType)
     project_filter_by_name_contains = graphene.List(ProjectObjectType, name=graphene.String(required=True))
-    project_info = graphene.Field(ProjectObjectType, pk=graphene.Int(required=True))
+    get_project_by_id = graphene.Field(ProjectObjectType, pk=graphene.Int(required=True))
 
     all_notes = graphene.List(ToDo_noteObjectType)
     get_note_by_id = graphene.Field(ToDo_noteObjectType, pk=graphene.Int(required=True))
@@ -73,7 +73,7 @@ class Query(graphene.ObjectType):
     def resolve_project_filter_by_name_contains(root, info, name):
         return ProjectModel.objects.filter(name__contains=name)
 
-    def resolve_project_info(root, info, pk):
+    def resolve_get_project_by_id(root, info, pk):
         try:
             return ProjectModel.objects.get(pk=pk)
         except ProjectModel.DoesNotExist:
