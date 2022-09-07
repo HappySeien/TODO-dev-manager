@@ -9,7 +9,7 @@ from projectapp.models import ProjectModel, ToDo_noteModel
 class UserObjectType(DjangoObjectType):
     class Meta:
         model = User
-        fields = ('id', 'username', 'first_name', 'last_name', 'date_of_birth', 'email')
+        fields = ('id', 'username', 'first_name', 'last_name', 'date_of_birth', 'email', 'project_author', 'project_developers')
 
 
 class ProjectObjectType(DjangoObjectType):
@@ -37,6 +37,9 @@ class Query(graphene.ObjectType):
     all_projects = graphene.List(ProjectObjectType)
     project_filter_by_name_contains = graphene.List(ProjectObjectType, name=graphene.String(required=True))
     project_info = graphene.Field(ProjectObjectType, pk=graphene.Int(required=True))
+
+    all_notes = graphene.List(ToDo_noteObjectType)
+    get_note_by_id = graphene.Field(ToDo_noteObjectType, pk=graphene.Int(required=True))
 
     def resolve_all_users(root, info):
         return User.objects.all()
@@ -71,6 +74,15 @@ class Query(graphene.ObjectType):
         try:
             return ProjectModel.objects.get(pk=pk)
         except ProjectModel.DoesNotExist:
+            return None
+
+    def resolve_all_notes(root, info):
+        return ToDo_noteModel.objects.all()
+
+    def resolve_get_note_by_id(root, info, pk):
+        try:
+            return ToDo_noteModel.objects.get(pk=pk)
+        except ToDo_noteModel.DoesNotExist:
             return None
 
 
