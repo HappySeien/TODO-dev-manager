@@ -9,7 +9,10 @@ from projectapp.models import ProjectModel, ToDo_noteModel
 class UserObjectType(DjangoObjectType):
     class Meta:
         model = User
-        fields = ('id', 'username', 'first_name', 'last_name', 'date_of_birth', 'email', 'project_author', 'project_developers')
+        fields = (
+            'id', 'username', 'first_name', 'last_name', 'date_of_birth', 'email', 
+            'project_author', 'project_developers', 'todo_notemodel_set'
+        )
 
 
 class ProjectObjectType(DjangoObjectType):
