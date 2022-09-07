@@ -25,7 +25,47 @@ class ToDo_noteObjectType(DjangoObjectType):
 
 
 class Query(graphene.ObjectType):
+    all_users = graphene.List(UserObjectType)
+    user_filter_by_name_contains = graphene.List(
+        UserObjectType, 
+        username=graphene.String(required=False),
+        first_name=graphene.String(required=False),
+        last_name=graphene.String(required=False)
+    )
+    get_user_by_id = graphene.Field(UserObjectType, pk=graphene.Int(required=True))
+
+    all_projects = graphene.List(ProjectObjectType)
+    project_filter_by_name_contains = graphene.List(ProjectObjectType, name=graphene.String(required=True))
     project_info = graphene.Field(ProjectObjectType, pk=graphene.Int(required=True))
+
+    def resolve_all_users(root, info):
+        return User.objects.all()
+
+    def resolve_user_filter_by_name_contains(
+        root, info, username=None, first_name=None, last_name=None
+    ):
+        user=None
+        if username:
+            user = User.objects.filter(username__contains=username)
+        if first_name:
+             user = User.objects.filter(first_name__contains=first_name)
+        if last_name:
+            user = User.objects.filter(last_name__contains=last_name)
+        if username or first_name or last_name:
+            return user
+        return user
+
+    def resolve_get_user_by_id(root, info, pk):
+        try:
+            return User.objects.get(pk=pk)
+        except User.DoesNotExist:
+            return None
+
+    def resolve_all_projects(root, info):
+        return ProjectModel.objects.all()
+
+    def resolve_project_filter_by_name_contains(root, info, name):
+        return ProjectModel.objects.filter(name__contains=name)
 
     def resolve_project_info(root, info, pk):
         try:
