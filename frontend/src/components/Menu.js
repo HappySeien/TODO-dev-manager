@@ -39,10 +39,17 @@ function MainMenu(auth) {
                                 Home
                             </MDBNavbarLink>
                         </MDBNavbarItem>
+                        
                         <MDBNavbarItem>
                             {auth.isAuth() ?
                             <MDBNavbarLink href='#' onClick={() => auth.logOut()}>Logout</MDBNavbarLink> :
                                 <MDBNavbarLink href='/login'>Login</MDBNavbarLink>}
+                        </MDBNavbarItem>
+
+                        <MDBNavbarItem>
+                            {auth.isAuth() ?
+                                <MDBNavbarLink href='/projects/create'>Create Project</MDBNavbarLink> :
+                                <> </>}
                         </MDBNavbarItem>
 
                         <MDBNavbarItem>
@@ -68,7 +75,7 @@ function MainMenu(auth) {
                         <MDBNavbarItem>
                             {auth.isAuth() ?
                             <MDBNavbarLink disabled href='#' tabIndex={-1} aria-disabled='true'>
-                                 {auth.currentUser}
+                                 {auth.currentUser.username}
                                 </MDBNavbarLink> : <MDBNavbarLink disabled href='#' tabIndex={-1} aria-disabled='true'>
                                     Anonim
                                 </MDBNavbarLink>}
