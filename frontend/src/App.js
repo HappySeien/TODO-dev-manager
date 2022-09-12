@@ -9,6 +9,7 @@ import ProjectList from './components/Projects';
 import ProjectInfoList from './components/PorjectInfo';
 import NotesList from './components/Notes';
 import ProjectForm from './components/ProjectForm';
+import NoteForm from './components/NoteForm';
 
 import { tokenApi } from './components/auth';
 import { UserApi } from './components/User';
@@ -113,6 +114,29 @@ class App extends React.Component {
       })
   }
 
+  createNote(
+    author, title, discroption, project
+  ) {
+
+    let headers = this.getHeaders()
+
+    axios
+      .post(NotesApi, {
+        'author': author,
+        'title': title,
+        'discroption': discroption,
+        'project': project
+      }, { headers })
+      .then(response => {
+        this.setState({
+          'redirect': '/'
+        }, this.loadData)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
   deleteNote(noteId) {
     let headers = this.getHeaders()
 
@@ -207,7 +231,12 @@ class App extends React.Component {
                   author, linkToGit, developers, name, discroption
                 )} />} />
             </Route>
-            <Route exect path='/notes' element={<NotesList notes={this.state.notes} deleteNote={(noteId) => this.deleteNote(noteId)} />} />
+            <Route path='/notes'> 
+              <Route index element={<NotesList notes={this.state.notes} deleteNote={(noteId) => this.deleteNote(noteId)} />} />
+              <Route path='create' element={<NoteForm projects={this.state.projects} createNote={
+                (author, title, discroption, project) => this.createNote(author, title, discroption, project)
+                }/>} />
+            </Route>
             <Route path='*' element={<NotFound404 />} />
             <Route exect path='/' element={<Navigate to='/projects' />} />
           </Routes>

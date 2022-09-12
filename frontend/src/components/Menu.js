@@ -53,6 +53,12 @@ function MainMenu(auth) {
                         </MDBNavbarItem>
 
                         <MDBNavbarItem>
+                            {auth.isAuth() ?
+                                <MDBNavbarLink href='/notes/create'>Create Note</MDBNavbarLink> :
+                                <> </>}
+                        </MDBNavbarItem>
+
+                        <MDBNavbarItem>
                             <MDBDropdown>
                                 <MDBDropdownToggle tag='a' className='nav-link'>
                                     Menu

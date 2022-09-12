@@ -50,7 +50,7 @@ class ProjectForm extends React.Component {
                     <MDBInput label='Link to git' id='linkToGit' name='linkToGit' type='url' />
                     <Multiselect 
                         options={this.props.developers} 
-                        displayValue="username"
+                        displayValue='username'
                         onSelect={(event) => this.getDevIdList(event)} 
                         onRemove={(event) => this.getDevIdList(event)} />
                     <MDBBtn type='submit' block>
