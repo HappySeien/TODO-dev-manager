@@ -27,6 +27,7 @@ class App extends React.Component {
       'users': [],
       'projects': [],
       'notes': [],
+      'redirect': false,
     }
   }
 
@@ -61,7 +62,8 @@ class App extends React.Component {
         this.setState(
           {
             'token': token,
-            'currentUser': username
+            'currentUser': username,
+            'redirect': '/'
           }, this.loadData
         )
       }
@@ -69,6 +71,10 @@ class App extends React.Component {
   }
 
   loadData () {
+    this.setState({
+      'redirect': false
+    })
+
     let headers =  this.getHeaders()
     // users
     axios.get(UserApi, { headers })
@@ -122,6 +128,7 @@ class App extends React.Component {
     return(
       <div className='d-flex flex-column min-vh-100'>
         <BrowserRouter>
+          {this.state.redirect ? <Navigate to={this.state.redirect} replace={true} /> : <div />}
           <nav>
             <MainMenu isAuth={() => this.isAuth()} logOut={() => this.logOut()} currentUser={this.state.currentUser} />
           </nav>
