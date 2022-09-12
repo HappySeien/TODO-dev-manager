@@ -70,6 +70,36 @@ class App extends React.Component {
       ).catch(error => console.log(error))
   }
 
+  deleteProject(projectId) {
+    let headers = this.getHeaders()
+
+    axios
+      .delete(`${ProjectApi}${projectId}`, { headers })
+      .then(response => {
+        this.setState({
+          'projects': this.state.projects.filter((project) => project.id != projectId)
+        })
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
+  deleteNote(noteId) {
+    let headers = this.getHeaders()
+
+    axios
+      .delete(`${NotesApi}${noteId}`, { headers })
+      .then(response => {
+        this.setState({
+          'notes': this.state.projects.filter((note) => note.id != noteId)
+        })
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
   loadData () {
     this.setState({
       'redirect': false
@@ -136,13 +166,13 @@ class App extends React.Component {
             <Route exect path='/login' element={<LoginForm authToken={(username, password) => this.authToken(username, password)} />} />
             <Route exect path='/users' element={<UserList users={this.state.users} />} />
             <Route path='/projects'>
-              <Route index element={<ProjectList projects={this.state.projects} />} />
+              <Route index element={<ProjectList projects={this.state.projects} deleteProject={(projectId) => this.deleteProject(projectId)} />} />
               <Route path=':projectId' element={<ProjectInfoList 
                 notes={this.state.notes} 
                 developers={this.state.users} 
                 projects={this.state.projects} />} />
             </Route>
-            <Route exect path='/notes' element={<NotesList notes={this.state.notes} />} />
+            <Route exect path='/notes' element={<NotesList notes={this.state.notes} deleteNote={(noteId) => this.deleteNote(noteId)} />} />
             <Route path='*' element={<NotFound404 />} />
             <Route exect path='/' element={<Navigate to='/projects' />} />
           </Routes>

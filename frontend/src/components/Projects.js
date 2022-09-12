@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
+import { MDBTable, MDBTableHead, MDBTableBody, MDBIcon, MDBBtn } from 'mdb-react-ui-kit';
 
 
 const ProjectApi = 'http://localhost:8000/api/projects/'
 
-const ProjectItem = ({ project }) => {
+const ProjectItem = ({ project, deleteProject }) => {
     return (
         <tr>
             <td>
@@ -23,11 +23,14 @@ const ProjectItem = ({ project }) => {
             <td>
                 {project.developers}
             </td>
+            <td>
+                <MDBBtn onClick={() => deleteProject(project.id)} color='link'><MDBIcon fas icon="archive" /></MDBBtn>
+            </td>
         </tr>
     )
 }
 
-const ProjectList = ({ projects }) => {
+const ProjectList = ({ projects, deleteProject }) => {
     return (
     <>
         <h1 className='text-center'>Projects</h1>
@@ -42,7 +45,7 @@ const ProjectList = ({ projects }) => {
                 </tr>
             </MDBTableHead>
             <MDBTableBody>
-                {projects.map((project) => <ProjectItem key={project.id.toString()} project={project} />)}
+                    {projects.map((project) => <ProjectItem key={project.id.toString()} project={project} deleteProject={deleteProject}/>)}
             </MDBTableBody>
         </MDBTable>
     </>
