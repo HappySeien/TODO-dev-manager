@@ -129,7 +129,7 @@ class App extends React.Component {
       }, { headers })
       .then(response => {
         this.setState({
-          'redirect': '/'
+          'redirect': '/notes'
         }, this.loadData)
       })
       .catch(error => {
