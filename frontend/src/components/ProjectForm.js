@@ -54,7 +54,7 @@ class ProjectForm extends React.Component {
                         onSelect={(event) => this.getDevIdList(event)} 
                         onRemove={(event) => this.getDevIdList(event)} />
                     <MDBBtn type='submit' block>
-                        Create
+                        Create Project
                     </MDBBtn>
                 </form>
             </div>
