@@ -1,10 +1,10 @@
 import React from 'react';
-import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
+import { MDBTable, MDBTableHead, MDBTableBody, MDBIcon, MDBBtn } from 'mdb-react-ui-kit';
 
 
 const NotesApi = 'http://localhost:8000/api/notes/'
 
-const NoteItem = ({ note }) => {
+const NoteItem = ({ note, deleteNote }) => {
     return (
         <tr>
             <td>
@@ -22,11 +22,14 @@ const NoteItem = ({ note }) => {
             <td>
                 {note.project}
             </td>
+            <td>
+                <MDBBtn onClick={() => deleteNote(note.id)} color='link'><MDBIcon fas icon="archive" /></MDBBtn>
+            </td>
         </tr>
     )
 }
 
-const NotesList = ({ notes }) => {
+const NotesList = ({ notes, deleteNote }) => {
     return (
         <MDBTable className='container-md'>
             <MDBTableHead>
@@ -39,7 +42,7 @@ const NotesList = ({ notes }) => {
                 </tr>
             </MDBTableHead>
             <MDBTableBody>
-                {notes.map((note) => <NoteItem key={note.id.toString()} note={note} />)}
+                {notes.map((note) => <NoteItem key={note.id.toString()} note={note} deleteNote={deleteNote} />)}
             </MDBTableBody>
         </MDBTable>
     )
