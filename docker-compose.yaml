@@ -21,7 +21,6 @@ services:
     depends_on:
       - db
     command: bash -c "
-        ./wait-for-postgres.sh db
         python manage.py makemigrations &&
         python manage.py migrate && 
         gunicorn config.wsgi -b 0.0.0.0:8080
