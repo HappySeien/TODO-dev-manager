@@ -6,7 +6,7 @@ services:
     privileged: true
     restart: always
     ports:
-      - 54328:5432
+      - 5432
     environment:
       POSTGRES_DB: 'postgres'
       POSTGRES_USER: 'admin'
@@ -21,6 +21,7 @@ services:
     depends_on:
       - db
     command: bash -c "
+        ./wait-for-postgres.sh db
         python manage.py makemigrations &&
         python manage.py migrate && 
         gunicorn config.wsgi -b 0.0.0.0:8080
