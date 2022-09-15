@@ -27,6 +27,7 @@ mixer==7.2.2
 packaging==21.3
 Pillow==9.2.0
 promise==2.3
+psycopg2==2.9.3
 PyJWT==2.4.0
 pyparsing==3.0.9
 python-dateutil==2.8.2
